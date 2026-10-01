@@ -1,10 +1,10 @@
 ---
-name: de-agentize
+name: ghostwriter
 description: Strip every trace of agent involvement from a branch's commits, code, and docs, then squash the result into clean history.
 disable-model-invocation: true
 ---
 
-# De-agentize
+# Ghostwriter
 
 Make a range of commits read as if the developer wrote every line by hand. A **trace** is anything that reveals an agent took part: in commit metadata, in code, or in docs. The finished branch carries zero traces, and its history shows no sign that traces were ever removed.
 
