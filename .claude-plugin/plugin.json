@@ -1,0 +1,10 @@
+{
+  "name": "oyvij-skills",
+  "description": "Øyvind Johannessen's personal agent skills.",
+  "author": {
+    "name": "Øyvind Johannessen",
+    "url": "https://github.com/oyvij"
+  },
+  "repository": "https://github.com/oyvij/skills",
+  "license": "MIT"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "oyvij",
+  "owner": {
+    "name": "Øyvind Johannessen",
+    "url": "https://github.com/oyvij"
+  },
+  "description": "Øyvind Johannessen's personal agent skills, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "oyvij-skills",
+      "source": "./",
+      "description": "Øyvind Johannessen's personal agent skills."
+    }
+  ]
+}
