@@ -18,12 +18,21 @@ Hunt each class across the whole range:
 
 Agent tooling the developer chose to keep is the project's content, not a trace: `CLAUDE.md`, `AGENTS.md`, skill folders, agent config, and code that integrates an AI API stay as they are.
 
+## Commit message
+
+The squashed message replaces any long prose the original commits carried:
+
+- **Length**: one to three lines.
+- **Content**: what the change does and how, stated plainly. One short statement per line.
+- **Punctuation**: end a statement with `.`, or join a label to its detail with `:`. Em-dashes become one of these.
+- **Scope**: the change itself. Trailers, cleanup, squashing, and agents stay out.
+
 ## Steps
 
 1. **Range.** Take the base commit from the arguments; otherwise use `git merge-base HEAD <default branch>`. Record the current `HEAD` SHA as the recovery point. Stash any uncommitted work with `git stash -u` so it stays out of the squash. Done when the base, the recovery SHA, and the commit list `<base>..HEAD` are known.
 2. **Pushed check.** If any commit in the range is already on a remote, the squash needs a force-push. Show the developer which branch and commits are affected and wait for their go-ahead before continuing.
 3. **Scan.** Read `git log <base>..HEAD` in full (bodies and trailers included) and every file the range touches, using `git diff --name-only <base>..HEAD`. Done when every trace in those messages and files is listed with its location.
 4. **Clean.** Edit each listed trace out of the working tree. Change only the trace: behaviour, formatting, and surrounding text stay untouched.
-5. **Squash.** Run `git reset --soft <base>`, stage everything, and commit once as the developer's own git identity. Write the message from the combined diff: a concise summary of what the change does, in the repo's existing commit style, with no trailers and no mention of cleanup, squashing, or agents.
-6. **Verify.** Grep `git log --format='%an %ae%n%cn %ce%n%B' <base>..HEAD` and `git diff <base>..HEAD` for every trace class. Done when both come back clean; otherwise clean the remaining traces, `git commit --amend --no-edit` (or fix the message), and grep again.
+5. **Squash.** Run `git reset --soft <base>`, stage everything, and commit once as the developer's own git identity. Write the message from the combined diff, following [Commit message](#commit-message).
+6. **Verify.** Grep `git log --format='%an %ae%n%cn %ce%n%B' <base>..HEAD` and `git diff <base>..HEAD` for every trace class, and check the message against [Commit message](#commit-message). Done when both come back clean and the message passes; otherwise clean the remaining traces, `git commit --amend --no-edit` (or fix the message), and grep again.
 7. **Restore.** `git stash pop` if step 1 stashed anything. Report the new commit SHA and the recovery SHA. Push only when the developer asks, using `--force-with-lease`.
